@@ -8,6 +8,8 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddCors();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NGaF5cXmdCeUxwWmFZfV1gdl9FY1ZSQWY/P1ZhSXxQdkNhUH5ac3dWQ2ZbWUw=");
+
 var app = builder.Build();
 app.UseCors(options =>
     {

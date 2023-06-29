@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Expense_Traker_Csharp.Models
 {
@@ -12,7 +13,20 @@ namespace Expense_Traker_Csharp.Models
         public int id { get; set; }
         public string title { get; set; } = "General";
         public string icon { get; set; } = "https://icons8.com/icon/Uc54oOGCsjOE/house";
-        public string type { get; set; } = "Out";
+        public string type { get; set; } = "Expense";
 
+        [NotMapped]
+        public string? titleWithIcon
+        {
+            get
+            {
+                return this.icon + " " + this.title;
+            }
+        }
     }
+
+
+
+
+
 }

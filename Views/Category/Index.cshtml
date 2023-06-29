@@ -10,43 +10,101 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th class="white-text">
+
+<div class="row">
+    <div class="col-md-7">
+        <ejs-grid id="category" dataSource="@Model" gridLines="None" allowSorting="true" allowPaging="true">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="Category" field="title"></e-grid-column>
+                <e-grid-column headerText="Type" template="#column" width="150px"></e-grid-column>
+                <e-grid-column headerText="Actions" template="#actions" width="100px"></e-grid-column>
+            </e-grid-columns>
+        </ejs-grid>
 
 
-            </th>
-            <th class="white-text">
-                Title
-            </th>
+    </div>
+    <div class="col-md-5 picture">
+        <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36">
+            <i class="fa-solid fa-shapes fa-2xl"></i>
+        </div>
+    </div>
+</div>
 
-            <th class="white-text">
-                Type
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <img src="@item.icon" alt="Image">
-                </td>
-                <td class="white-text">
-                    @Html.DisplayFor(modelItem => item.title)
-                </td>
+<script id="column" type="text/x-template">
+    ${if(type == "Income")}
+    <span class="badge bg-success">${type}</span>
+    ${else}
+    <span class="badge bg-danger">${type}</span>
+    ${/if}
+</script>
 
-                <td class="white-text">
-                    @Html.DisplayFor(modelItem => item.type)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<script id="actions" type="text/x-template">
+<div class = "d-flex flex0row justify-content-start">
+    <a class="ntn btn-sm" href="/Category/Edit/${id}">
+    <i class="fa-solid fa-pen fa-lg"></i>
+
+    </a>
+</div>
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@* <table class="table">
+<thead>
+<tr>
+<th class="white-text">
+
+
+</th>
+<th class="white-text">
+Title
+</th>
+
+<th class="white-text">
+Type
+</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+@foreach (var item in Model)
+{
+<tr>
+<td>
+<img src="@item.icon" alt="Image">
+</td>
+<td class="white-text">
+@Html.DisplayFor(modelItem => item.title)
+</td>
+
+<td class="white-text">
+@Html.DisplayFor(modelItem => item.type)
+</td>
+<td>
+<a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+<a asp-action="Details" asp-route-id="@item.id">Details</a> |
+<a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+</td>
+</tr>
+}
+</tbody>
+</table> *@

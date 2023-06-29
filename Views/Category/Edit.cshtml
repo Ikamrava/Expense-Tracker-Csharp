@@ -14,20 +14,26 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="id" />
             <div class="form-group">
-                <label asp-for="title" class="control-label"></label>
-                <input asp-for="title" class="form-control" />
+                <ejs-textbox id="title" name="title" placeholder="Title" floatLabelType="Always"
+                    value="@Model.title"></ejs-textbox>
                 <span asp-validation-for="title" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="icon" class="control-label"></label>
-                <input asp-for="icon" class="form-control" />
+
+                <ejs-textbox id="icon" placeholder="Icon" name="icon" floatLabelType="Always"
+                    value="@Model.icon"></ejs-textbox>
                 <span asp-validation-for="icon" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="type" class="control-label"></label>
-                <input asp-for="type" class="form-control" />
+
+                <input type="radio" id="radioleft" value="Expense" name="type" checked=@(Model.type == "Expense") />
+                <label class="e-btn" for="radioleft">Expense</label>
+                <input type="radio" id="radiomiddle" value="Income" name="type" checked=@Model.type==="Income" />
+                <label class="e-btn" for="radiomiddle">Income</label>
+
                 <span asp-validation-for="type" class="text-danger"></span>
             </div>
+
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
