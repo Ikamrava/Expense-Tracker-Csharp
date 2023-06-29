@@ -1,0 +1,53 @@
+html {
+  font-size: 14px;
+  color: white;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+    color: white;
+
+  }
+}
+
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+  background-color: #12161d;
+  color: white;
+
+}
+
+label {
+  margin-top: .5rem;
+
+}
+
+input {
+  margin-top: .5rem;
+}
+
+.e-bigger {
+  font-size: x-large;
+}
+
+table {
+  color: white;
+}
+
+.white-text {
+  color: white;
+}
