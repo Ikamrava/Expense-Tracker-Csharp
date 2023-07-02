@@ -7,13 +7,13 @@ namespace Expense_Traker_Csharp.Models
 {
     public class Transaction
     {
-        public int Id { get; set; }
-        public string Description { get; set; } = "empty";
-        public double Amount { get; set; } = 0.0;
-        public DateTime Date { get; set; } = DateTime.Now;
+        public int id { get; set; }
+        public string description { get; set; } = "empty";
+        public double amount { get; set; } = 0.0;
+        public DateTime date { get; set; } = DateTime.Now;
 
-        public int CategoryId { get; set; }
-        public Category Category { get; set; }
+        public int categoryid { get; set; }
+        public Category category { get; set; }
 
     }
 }
