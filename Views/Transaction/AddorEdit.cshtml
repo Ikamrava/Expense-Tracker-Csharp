@@ -1,0 +1,46 @@
+@model Expense_Traker_Csharp.Models.Transaction
+
+@{
+    ViewData["PageTtile"] = Model?.transactionid == 0 ? "Create" : "Edit";
+}
+
+<h1>Create</h1>
+
+<h4>Transaction</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="AddorEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="note" class="control-label"></label>
+                <input asp-for="note" class="form-control" />
+                <span asp-validation-for="note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <ejs-numerictextbox id="amount" ejs-for="amount" placeholder="Amount" floatLabelType="Always" min=0 format="c0"></ejs-numerictextbox>
+                <span asp-validation-for="amount" class="text-danger" ></span>
+            </div>
+            <div class="form-group">
+                <ejs-datepicker id="date" ejs-for="date" placeholder="Date" floatLabelType="Always"
+                    format="dd-MMM-yy"></ejs-datepicker>
+                <span asp-validation-for="date" class="text-danger"></span>
+                <div class="mb-3">
+                    <ejs-dropdownlist id="categoryid" dataSource="@ViewBag.category"
+                        ejs-for="categoryid" placeholder="Category" floatLabelType="Always" allowFiltering="true" ignoreAccent="true" filterType="Contains">
+                        <e-dropdownlist-fields value = "categoryid"  text="titleWithIcon"> </e-dropdownlist-fields>
+                    </ejs-dropdownlist>
+
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="AddorEdit" class="btn btn-primary" />
+                </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

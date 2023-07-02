@@ -35,7 +35,7 @@ namespace Expense_Traker_Csharp.Controllers
             }
 
             var category = await _context.category
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.categoryid == id);
             if (category == null)
             {
                 return NotFound();
@@ -87,9 +87,9 @@ namespace Expense_Traker_Csharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,title,icon,type")] Category category)
+        public async Task<IActionResult> Edit(int id, [Bind("categoryid,title,icon,type")] Category category)
         {
-            if (id != category.id)
+            if (id != category.categoryid)
             {
                 return NotFound();
             }
@@ -103,7 +103,7 @@ namespace Expense_Traker_Csharp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(category.id))
+                    if (!CategoryExists(category.categoryid))
                     {
                         return NotFound();
                     }
@@ -126,7 +126,7 @@ namespace Expense_Traker_Csharp.Controllers
             }
 
             var category = await _context.category
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.categoryid == id);
             if (category == null)
             {
                 return NotFound();
@@ -156,7 +156,7 @@ namespace Expense_Traker_Csharp.Controllers
 
         private bool CategoryExists(int id)
         {
-            return (_context.category?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.category?.Any(e => e.categoryid == id)).GetValueOrDefault();
         }
     }
 }

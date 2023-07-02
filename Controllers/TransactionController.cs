@@ -26,28 +26,12 @@ namespace Expense_Traker_Csharp.Controllers
         }
 
         // GET: Transaction/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null || _context.transaction == null)
-            {
-                return NotFound();
-            }
 
-            var transaction = await _context.transaction
-                .Include(t => t.category)
-                .FirstOrDefaultAsync(m => m.id == id);
-            if (transaction == null)
-            {
-                return NotFound();
-            }
-
-            return View(transaction);
-        }
 
         // GET: Transaction/Create
-        public IActionResult Create()
+        public IActionResult AddorEdit()
         {
-            ViewData["categoryid"] = new SelectList(_context.category, "id", "id");
+            populateCategory();
             return View();
         }
 
@@ -56,7 +40,7 @@ namespace Expense_Traker_Csharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,description,amount,date,categoryid")] Transaction transaction)
+        public async Task<IActionResult> AddorEdit([Bind("transactionid,note,amount,date,categoryid")] Transaction transaction)
         {
             if (ModelState.IsValid)
             {
@@ -64,7 +48,7 @@ namespace Expense_Traker_Csharp.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["categoryid"] = new SelectList(_context.category, "id", "id", transaction.categoryid);
+            ViewData["categoryid"] = new SelectList(_context.category, "categoryid", "categoryid", transaction.categoryid);
             return View(transaction);
         }
 
@@ -81,7 +65,7 @@ namespace Expense_Traker_Csharp.Controllers
             {
                 return NotFound();
             }
-            ViewData["categoryid"] = new SelectList(_context.category, "id", "id", transaction.categoryid);
+            ViewData["categoryid"] = new SelectList(_context.category, "categoryid", "categoryid", transaction.categoryid);
             return View(transaction);
         }
 
@@ -90,9 +74,9 @@ namespace Expense_Traker_Csharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,description,amount,date,categoryid")] Transaction transaction)
+        public async Task<IActionResult> Edit(int id, [Bind("transactionid,note,amount,date,categoryid")] Transaction transaction)
         {
-            if (id != transaction.id)
+            if (id != transaction.transactionid)
             {
                 return NotFound();
             }
@@ -106,7 +90,7 @@ namespace Expense_Traker_Csharp.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TransactionExists(transaction.id))
+                    if (!TransactionExists(transaction.transactionid))
                     {
                         return NotFound();
                     }
@@ -117,7 +101,7 @@ namespace Expense_Traker_Csharp.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["categoryid"] = new SelectList(_context.category, "id", "id", transaction.categoryid);
+            ViewData["categoryid"] = new SelectList(_context.category, "categoryid", "categoryid", transaction.categoryid);
             return View(transaction);
         }
 
@@ -131,7 +115,7 @@ namespace Expense_Traker_Csharp.Controllers
 
             var transaction = await _context.transaction
                 .Include(t => t.category)
-                .FirstOrDefaultAsync(m => m.id == id);
+                .FirstOrDefaultAsync(m => m.transactionid == id);
             if (transaction == null)
             {
                 return NotFound();
@@ -154,14 +138,29 @@ namespace Expense_Traker_Csharp.Controllers
             {
                 _context.transaction.Remove(transaction);
             }
-            
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool TransactionExists(int id)
         {
-          return (_context.transaction?.Any(e => e.id == id)).GetValueOrDefault();
+            return (_context.transaction?.Any(e => e.transactionid == id)).GetValueOrDefault();
         }
+
+
+        [NonAction]
+        public void populateCategory()
+        {
+            var categoryCollection = _context.category.ToList();
+            Category Defaultcategory = new Category() { categoryid = 0, title = "Choose Category" };
+            categoryCollection.Insert(0, Defaultcategory);
+
+
+            ViewBag.category = categoryCollection;
+
+
+        }
+
     }
 }
