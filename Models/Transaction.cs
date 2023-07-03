@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Expense_Traker_Csharp.Models
 
@@ -17,6 +18,27 @@ namespace Expense_Traker_Csharp.Models
 
         public int categoryid { get; set; } = 17;
         public Category category { get; set; }
+
+        [NotMapped]
+        public string? cattitleWithIcon
+        {
+            get
+            {
+                return category == null ? "" : category.icon + " " + category.title;
+            }
+        }
+
+        [NotMapped]
+
+        public string? formatedAmount
+        {
+            get
+            {
+                return category == null || category.type == "Expense" ? "-" + amount.ToString() : "+" + amount.ToString();
+            }
+
+        }
+
 
     }
 }

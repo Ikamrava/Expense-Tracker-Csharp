@@ -9,46 +9,26 @@
 <p>
     <a asp-action="AddorEdit">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.note)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.category)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.note)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.category.categoryid)
-                </td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.transactionid">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.transactionid">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.transactionid">Delete</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-7">
+
+        <ejs-grid id="transaction" dataSource="@Model" gridLines="None" allowSorting="true" allowPaging="true">
+            <e-grid-pagesettings pageSize="10"></e-grid-pagesettings>
+            <e-grid-columns>
+                <e-grid-column headerText="Category" field="cattitleWithIcon"></e-grid-column>
+                <e-grid-column headerText="Date" template="#date" width="150px"></e-grid-column>
+                <e-grid-column headerText="Amount" template="#formatedAmount" width="150px"></e-grid-column>
+
+                @* <e-grid-column headerText="Actions" template="#edit" width="100px"></e-grid-column> *@
+
+            </e-grid-columns>
+        </ejs-grid>
+
+
+    </div>
+    <div class="col-md-5 picture">
+        <div class="widget h-100 d-flex justify-content-center align-items-center" style="background-color:#212b36">
+            <i class="fa-solid fa-money-bill-transfer fa-2xl"></i>
+        </div>
+    </div>
+</div>
