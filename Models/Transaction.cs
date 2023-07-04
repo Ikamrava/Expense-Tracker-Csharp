@@ -47,6 +47,7 @@
 
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.VisualBasic;
 
 namespace Expense_Traker_Csharp.Models
 {
@@ -65,7 +66,7 @@ namespace Expense_Traker_Csharp.Models
 
         public string? note { get; set; }
 
-        public DateOnly date { get; set; }
+        public DateTime date { get; set; }
 
         [NotMapped]
         public string? cattitleWithIcon
