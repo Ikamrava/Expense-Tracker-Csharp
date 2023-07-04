@@ -2,10 +2,12 @@ html {
   font-size: 14px;
 }
 
-@media (min-width: 768px) {
+@media (max-width: 768px) {
   html {
       font-size: 16px;
   }
+
+
 }
 
 html {
@@ -30,8 +32,8 @@ body {
 }
 
 .main-content {
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 290px;
+  
   overflow-y : auto;
   height:92vh;
 }
@@ -205,7 +207,7 @@ nav.navbar {
       }
 
 nav.navbar {
-  margin-left: 290px;
+  margin-left: 0px;
 }
 
 /*Profile Pic*/

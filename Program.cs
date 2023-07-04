@@ -8,7 +8,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddCors();
 builder.Services.AddDbContext<ApplicationDbContext>();
 
-Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Ngo9BigBOggjHTQxAR8/V1NGaF5cXmdCeUxwWmFZfV1gdl9FY1ZSQWY/P1ZhSXxQdkNhUH5ac3dWQ2ZbWUw=");
+Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("Mgo+DSMBMAY9C3t2V1hhQlJAfV5AQmBIYVp/TGpJfl96cVxMZVVBJAtUQF1hSn5UdkFiWH9Xc3NVRmhU");
 
 var app = builder.Build();
 app.UseCors(options =>
@@ -35,6 +35,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
 
 app.Run();
