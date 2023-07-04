@@ -76,15 +76,14 @@ namespace Expense_Traker_Csharp.Models
             }
         }
 
-        //     [NotMapped]
-        //     public string? FormattedAmount
-        //     {
-        //         get
-        //         {
-        //             return ((category == null || category.type == "Expense") ? "- " : "+ ") + amount.ToString("C0");
-        //         }
-        //     }
+        [NotMapped]
+        public string? FormattedAmount
+        {
+            get
+            {
+                return ((category == null || category.type == "Expense") ? "- " : "+ ") + amount.ToString("C0");
+            }
+        }
 
-        // }
     }
 }
