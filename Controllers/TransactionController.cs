@@ -26,12 +26,30 @@ namespace Expense_Traker_Csharp.Controllers
         }
 
         // GET: Transaction/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null || _context.transaction == null)
+            {
+                return NotFound();
+            }
 
+            var transaction = await _context.transaction
+                .Include(t => t.category)
+                .FirstOrDefaultAsync(m => m.transactionid == id);
+            if (transaction == null)
+            {
+                return NotFound();
+            }
+
+            return View(transaction);
+        }
 
         // GET: Transaction/Create
-        public IActionResult AddorEdit()
+        public IActionResult Create()
+
         {
-            populateCategory();
+            PopulateCategories();
+            ViewData["categoryid"] = new SelectList(_context.category, "categoryid", "categoryid");
             return View();
         }
 
@@ -40,8 +58,9 @@ namespace Expense_Traker_Csharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> AddorEdit([Bind("transactionid,note,amount,date,categoryid")] Transaction transaction)
+        public async Task<IActionResult> Create([Bind("transactionid,categoryid,amount,note,date")] Transaction transaction)
         {
+            PopulateCategories();
             if (ModelState.IsValid)
             {
                 _context.Add(transaction);
@@ -55,6 +74,7 @@ namespace Expense_Traker_Csharp.Controllers
         // GET: Transaction/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            PopulateCategories();
             if (id == null || _context.transaction == null)
             {
                 return NotFound();
@@ -74,7 +94,7 @@ namespace Expense_Traker_Csharp.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("transactionid,note,amount,date,categoryid")] Transaction transaction)
+        public async Task<IActionResult> Edit(int id, [Bind("transactionid,categoryid,amount,note,date")] Transaction transaction)
         {
             if (id != transaction.transactionid)
             {
@@ -148,19 +168,13 @@ namespace Expense_Traker_Csharp.Controllers
             return (_context.transaction?.Any(e => e.transactionid == id)).GetValueOrDefault();
         }
 
-
         [NonAction]
-        public void populateCategory()
+        public void PopulateCategories()
         {
-            var categoryCollection = _context.category.ToList();
-            Category Defaultcategory = new Category() { categoryid = 0, title = "Choose Category" };
-            categoryCollection.Insert(0, Defaultcategory);
-
-
-            ViewBag.category = categoryCollection;
-
-
+            var CategoryCollection = _context.category.ToList();
+            Category DefaultCategory = new Category() { categoryid = 0, title = "Choose a Category" };
+            CategoryCollection.Insert(0, DefaultCategory);
+            ViewBag.category = CategoryCollection;
         }
-
     }
 }

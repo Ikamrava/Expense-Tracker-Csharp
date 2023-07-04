@@ -12,7 +12,7 @@ namespace Expense_Traker_Csharp.Models
 
         public int categoryid { get; set; }
         public string title { get; set; } = "General";
-        public string icon { get; set; } = "https://icons8.com/icon/Uc54oOGCsjOE/house";
+        public string icon { get; set; } = "";
         public string type { get; set; } = "Expense";
 
         [NotMapped]
