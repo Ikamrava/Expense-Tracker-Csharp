@@ -5,11 +5,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Transactions;
 using Expense_Traker_Csharp.Models;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+
+
+
+
 namespace Expense_Traker_Csharp.Controllers
 {
+    // [Authorize]
     public class DashboardController : Controller
     {
 
@@ -20,9 +28,6 @@ namespace Expense_Traker_Csharp.Controllers
         {
             _context = context;
         }
-
-
-
         public async Task<ActionResult> IndexAsync()
         {
             DateTime startDate = DateTime.Today.AddDays(-6);
@@ -102,13 +107,22 @@ namespace Expense_Traker_Csharp.Controllers
 
             return View();
         }
+
+        // public async Task<IActionResult> LogOut()
+
+        // {
+        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //     return RedirectToAction("Login", "Account");
+        // }
     }
 
-    public class SplineChartData
-    {
-        public string day;
-        public int income;
-        public int expense;
 
-    }
+}
+
+public class SplineChartData
+{
+    public string day;
+    public int income;
+    public int expense;
+
 }

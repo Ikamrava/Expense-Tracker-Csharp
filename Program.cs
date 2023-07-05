@@ -1,13 +1,23 @@
 using Expense_Traker_Csharp.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+//     .AddCookie(options =>
+//     {
+//         options.LoginPath = "/Account/Login";
+//         options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
+//     });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddCors();
 builder.Services.AddDbContext<ApplicationDbContext>();
-
+DotNetEnv.Env.Load();
 Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense(Environment.GetEnvironmentVariable("SyncfusionLicense"));
 
 var app = builder.Build();
@@ -31,6 +41,8 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+// app.UseAuthentication();
+
 
 app.UseAuthorization();
 

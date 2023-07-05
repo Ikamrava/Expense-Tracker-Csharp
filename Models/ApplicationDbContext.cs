@@ -37,5 +37,7 @@ namespace Expense_Traker_Csharp.Models
         public DbSet<Transaction> transaction { get; set; }
         public DbSet<Category> category { get; set; }
 
+
+
     }
 }
