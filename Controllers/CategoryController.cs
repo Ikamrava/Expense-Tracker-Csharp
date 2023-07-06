@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Expense_Traker_Csharp.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class CategoryController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -141,5 +141,12 @@ namespace Expense_Traker_Csharp.Controllers
         {
             return (_context.category?.Any(e => e.categoryid == id)).GetValueOrDefault();
         }
+
+        // public async Task<IActionResult> LogOut()
+
+        // {
+        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+        //     return RedirectToAction("Login", "Account");
+        // }
     }
 }

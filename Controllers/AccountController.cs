@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -30,7 +31,8 @@ namespace Expense_Traker_Csharp.Models
 
         public async Task<IActionResult> Login(VMLogin modelLogin)
         {
-            if (modelLogin.Email == "kamrava.iman@outlook.com" && modelLogin.Password == "95309530")
+            DotNetEnv.Env.Load();
+            if (modelLogin.Email == Environment.GetEnvironmentVariable("EMAIL") && modelLogin.Password == Environment.GetEnvironmentVariable("PASSWORD"))
             {
                 List<Claim> claims = new List<Claim>()
                 {

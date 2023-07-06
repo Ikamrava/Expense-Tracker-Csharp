@@ -17,7 +17,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Expense_Traker_Csharp.Controllers
 {
-    // [Authorize]
+    [Authorize]
     public class DashboardController : Controller
     {
 
@@ -108,12 +108,12 @@ namespace Expense_Traker_Csharp.Controllers
             return View();
         }
 
-        // public async Task<IActionResult> LogOut()
+        public async Task<IActionResult> LogOut()
 
-        // {
-        //     await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-        //     return RedirectToAction("Login", "Account");
-        // }
+        {
+            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            return RedirectToAction("Login", "Account");
+        }
     }
 
 

@@ -6,12 +6,12 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-//     .AddCookie(options =>
-//     {
-//         options.LoginPath = "/Account/Login";
-//         options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
-//     });
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(options =>
+    {
+        options.LoginPath = "/Account/Login";
+        options.ExpireTimeSpan = TimeSpan.FromMinutes(50);
+    });
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
@@ -41,13 +41,13 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
-// app.UseAuthentication();
+app.UseAuthentication();
 
 
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dashboard}/{action=Index}/{id?}");
+    pattern: "{controller=Account}/{action=Login}/{id?}");
 
 app.Run();

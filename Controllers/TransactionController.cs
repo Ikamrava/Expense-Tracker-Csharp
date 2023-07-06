@@ -6,9 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Expense_Traker_Csharp.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Expense_Traker_Csharp.Controllers
 {
+    [Authorize]
     public class TransactionController : Controller
     {
         private readonly ApplicationDbContext _context;
