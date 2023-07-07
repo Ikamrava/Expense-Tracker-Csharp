@@ -22,7 +22,7 @@ namespace Expense_Traker_Csharp.Models
             ClaimsPrincipal claimsPrincipal = HttpContext.User;
             if (claimsPrincipal.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "https://ikam-expense.azurewebsites.net/Dashboard");
             }
             return View();
         }
@@ -48,7 +48,7 @@ namespace Expense_Traker_Csharp.Models
 
                 };
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsIdentity), properties);
-                return RedirectToAction("Index", "Dashboard");
+                return RedirectToAction("Index", "https://ikam-expense.azurewebsites.net/Dashboard");
             }
             ViewData["ValidateMessage"] = "Invalid Email or Password";
 
